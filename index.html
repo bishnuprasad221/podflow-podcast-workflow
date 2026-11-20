@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PodFlow – Podcast Production Workflow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar navigation: each button switches the visible <section> -->
+  <aside class="sidebar">
+    <div class="brand">🎙️ PodFlow</div>
+    <nav>
+      <button class="nav-btn active" data-view="dashboard">📊 Dashboard</button>
+      <button class="nav-btn" data-view="episodes">🎧 Episodes</button>
+      <button class="nav-btn" data-view="guests">👤 Guests</button>
+    </nav>
+    <div class="side-actions">
+      <button class="btn ghost" id="exportBtn">Export JSON</button>
+      <button class="btn ghost" id="resetBtn">Reset demo data</button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="view active">
+      <h1>Episode Dashboard</h1>
+      <div class="stats" id="stats"></div>
+      <div class="grid-2">
+        <div class="panel"><h2>Pipeline overview</h2><div id="pipeline"></div></div>
+        <div class="panel"><h2>Upcoming recordings</h2><ul id="upcoming" class="plain"></ul></div>
+      </div>
+    </section>
+
+    <!-- EPISODES -->
+    <section id="view-episodes" class="view">
+      <div class="toolbar">
+        <h1>Episodes</h1>
+        <div class="tools">
+          <input type="search" id="search" placeholder="Search episodes…">
+          <select id="stageFilter"></select>
+          <button class="btn primary" id="addEpisode">+ New episode</button>
+        </div>
+      </div>
+      <div class="cards" id="episodeList"></div>
+    </section>
+
+    <!-- GUESTS -->
+    <section id="view-guests" class="view">
+      <div class="toolbar">
+        <h1>Guest Profiles</h1>
+        <button class="btn primary" id="addGuest">+ New guest</button>
+      </div>
+      <div class="cards" id="guestList"></div>
+    </section>
+  </main>
+
+  <!-- Episode form (native <dialog> element) -->
+  <dialog id="episodeDialog">
+    <form id="episodeForm" method="dialog">
+      <h2 id="episodeDialogTitle">Episode</h2>
+      <label>Title <input id="e-title" required maxlength="80"></label>
+      <label>Idea / topic <textarea id="e-idea" rows="2"></textarea></label>
+      <div class="row">
+        <label>Guest <select id="e-guest"></select></label>
+        <label>Recording date <input type="date" id="e-recordDate"></label>
+      </div>
+      <div class="row" id="statusFields"></div>
+      <label>Publish date <input type="date" id="e-publishDate"></label>
+      <label>Script <textarea id="e-scriptText" rows="5" placeholder="Write or paste the episode script…"></textarea></label>
+      <div class="form-actions">
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Guest form -->
+  <dialog id="guestDialog">
+    <form id="guestForm" method="dialog">
+      <h2 id="guestDialogTitle">Guest</h2>
+      <label>Name <input id="g-name" required maxlength="60"></label>
+      <div class="row">
+        <label>Role / expertise <input id="g-role"></label>
+        <label>Email <input type="email" id="g-email"></label>
+      </div>
+      <label>Short bio <textarea id="g-bio" rows="3"></textarea></label>
+      <div class="form-actions">
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
